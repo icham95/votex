@@ -58,7 +58,7 @@
         </div>
         <div class="input">  
           <label for=""> Password </label>
-          <input type="text" v-model="password">
+          <input type="password" v-model="password">
         </div>
         <div class="input">
           <button> Register </button>

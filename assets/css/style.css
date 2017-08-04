@@ -53,6 +53,15 @@ header > div > a:hover {
 .input > input[type=text] {
   width: 100%;
   padding:10px;
+  border: 1px solid gray;
+  background-color:snow;
+}
+
+.input > input[type=password] {
+  width: 100%;
+  padding:10px;
+  border: 1px solid gray;
+  background-color:snow;
 }
 
 .input > button {
