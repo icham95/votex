@@ -37,6 +37,31 @@ header > div > a:hover {
   border-bottom: 5px solid lightblue;
 }
 
-.haha {
-  color:red;
+#content {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.input {
+  margin: 10px 0px;
+}
+
+.input > label {
+  display: block;
+}
+
+.input > input[type=text] {
+  width: 100%;
+  padding:10px;
+}
+
+.input > button {
+  width: 50%;
+  padding: 10px;
+  display: block;
+  margin: 0 auto;
+  background-color:dodgerblue;
+  border: 0px;
+  color:snow;
+  cursor:pointer;
 }

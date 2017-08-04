@@ -19,17 +19,27 @@
     </div>
   </header>
 
-  <button @click="">
-    test
-  </button>
-
-  <router-view></router-view>
+  <div id="content">
+    <router-view></router-view>
+  </div>
 
 </div>
 
   <script type="text/x-template" id="t-login">
     <div>
-      login
+      <form @submit.prevent = "login()">
+        <div class="input">
+          <label for=""> Username </label>
+          <input type="text" v-model="username">
+        </div>
+        <div class="input">  
+          <label for=""> Password </label>
+          <input type="text" v-model="password">
+        </div>
+        <div class="input">
+          <button> Login </button>
+        </div>
+      </form>
     </div>
   </script>
 
@@ -41,7 +51,19 @@
 
   <script type="text/x-template" id="t-register">
     <div>
-      register
+      <form @submit.prevent = "register()">
+        <div class="input">
+          <label for=""> Username </label>
+          <input type="text" v-model="username">
+        </div>
+        <div class="input">  
+          <label for=""> Password </label>
+          <input type="text" v-model="password">
+        </div>
+        <div class="input">
+          <button> Register </button>
+        </div>
+      </form>
     </div>
   </script>
 
@@ -52,7 +74,18 @@
   <script>
     
     const Login = {
-      template: '#t-login'
+      template: '#t-login',
+      data () {
+        return {
+          username: '',
+          password: ''
+        }
+      },
+      methods: {
+        login () {
+          console.log('oke')
+        }
+      }
     }
 
     const Home = {
@@ -60,7 +93,18 @@
     }
 
     const Register = {
-      template: '#t-register'
+      template: '#t-register',
+      data () {
+        return {
+          username: '',
+          password: ''
+        }
+      },
+      methods: {
+        register () {
+          console.log('oke')
+        }
+      }
     }
 
     const routes = [
@@ -74,8 +118,9 @@
     })
 
     const app = new Vue ({
+      el: '#app',
       router
-    }).$mount('#app')
+    })
   </script>
 </body>
 </html>
