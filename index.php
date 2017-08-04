@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@
   </header>
 
   <div id="content">
-    <router-view></router-view>
+    <router-view></router-view> 
   </div>
 
 </div>
@@ -35,7 +36,7 @@
         </div>
         <div class="input">  
           <label for=""> Password </label>
-          <input type="text" v-model="password">
+          <input type="password" v-model="password">
         </div>
         <div class="input">
           <button> Login </button>
@@ -95,7 +96,31 @@
       },
       methods: {
         login () {
-          console.log('oke')
+          let data = JSON.stringify({
+            username: this.username,
+            password: this.password
+          })
+          fetch(BASEURL + 'api/login', {
+            method: 'POST',
+            body: data
+          })
+          .then(resp => resp.json())
+          .then(data => {
+            if (data.success === true) {
+              store.state.msgFeedback = {
+                type: 'success',
+                msg: 'pendaftaran berhasil'
+              }
+              this.$router.push('/feedback')
+            } else {
+              store.state.msgFeedback = {
+                type: 'failed',
+                msg: '',
+                msgs : data.msg
+              }
+              this.$router.push('/feedback')
+            }
+          })
         }
       }
     }

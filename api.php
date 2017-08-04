@@ -4,12 +4,49 @@ include_once('classes/autoload.php');
 
 use classes\{ Sapi, Database};
 
-
-
 $s = new Sapi();
 $s->set_routes('/login', function () {
-    
-}, 'GET');
+  $payload = file_get_contents('php://input');
+  $data = json_decode($payload);
+
+  // validation
+  $msgErr = [];
+  if (strlen($data->username) < 1) {
+    array_push($msgErr, 'Username tidak boleh kosong');
+  }
+
+  if (strlen($data->password) < 1) {
+    array_push($msgErr, 'Password tidak boleh kosong');
+  }
+
+  if (count($msgErr) > 0) {
+    return [
+      'success' => false,
+      'msg' => $msgErr
+    ];
+  } else {
+    $db = new Database();
+    $users = $db->getUser('name', $data->username);
+    if (count($users) > 0) {
+      if (password_verify($data->password, $users[0]['password']) == true) {
+        return [
+          'success' => true,
+          'msg' => 'login berhasil'
+        ];  
+      } else {
+        return [
+          'success' => false,
+          'msg' => 'username dan password tidak cocok!'
+        ];  
+      }
+    } else {
+      return [
+        'success' => false,
+        'msg' => 'username dan password tidak cocok!'
+      ];
+    }
+  }
+}, 'POST');
 
 $s->set_routes('/register', function () {
   $payload = file_get_contents('php://input');
@@ -36,8 +73,7 @@ $s->set_routes('/register', function () {
       'success' => false,
       'msg' => $msgErr
     ];
-  }
-  else {
+  } else {
     $data->password = password_hash($data->password, PASSWORD_DEFAULT);
     $arr = [$data->username, $data->password];
     $insert_id = $db->register($arr);
