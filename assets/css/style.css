@@ -4,4 +4,39 @@
 
 header {
   width:100%;
+  display: flex;
+  justify-content: space-between;
+  background-color:dodgerblue;
+  position: relative;
+}
+
+header > div {
+  padding:10px 20px;
+  color:white;
+}
+
+header > div:first-child {
+  font-size: 18px;
+  line-height: 140%;
+  font-size:24px;
+}
+
+header > div:last-child {
+  font-size: 18px;
+  line-height: 200%;
+}
+
+header > div > a {
+  color:white;
+  text-decoration: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+header > div > a:hover {
+  border-bottom: 5px solid lightblue;
+}
+
+.haha {
+  color:red;
 }
