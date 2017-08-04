@@ -11,7 +11,7 @@ class Sapi
 
   public function set_routes ($path, $function, $verb = 'GET') {
     $this->routes[$path]['verb'] = $verb;
-    $this->routes[$path]['function'] = $function();
+    $this->routes[$path]['function'] = $function;
   }
 
   public function run()
@@ -20,10 +20,10 @@ class Sapi
     $get = $_GET['key'];
     $get = substr($get, 3);
     foreach ( $this->routes as $key => $value ) {
-      if ($get == $key) {
+      if ($get === $key) {
         if ( $value['verb'] == $http_verb ) {
-          echo json_encode($value['function']);
-          break;
+          echo json_encode( $value['function']() );
+          break 1;
         }
       }
     }
