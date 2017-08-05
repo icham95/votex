@@ -79,9 +79,12 @@
     </div>
   </script>
 
-  <script src="https://unpkg.com/vue"></script>
+  <!--<script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-  <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/vuex"></script>-->
+  <script src="assets/js/vue.js"></script>
+  <script src="assets/js/vue-router.js"></script>
+  <script src="assets/js/vuex.js"></script>
 
   <script>
     var BASEURL = 'http://localhost/pwa/vote/';

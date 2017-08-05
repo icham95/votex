@@ -1,8 +1,12 @@
 <?php 
 
 include_once('classes/autoload.php');
+include_once('vendor/autoload.php');
 
 use classes\{ Sapi, Database};
+use \Firebase\JWT\JWT;
+
+$_key = 'begadang';
 
 $s = new Sapi();
 $s->set_routes('/login', function () {
