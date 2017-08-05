@@ -20,30 +20,30 @@ $s->set_routes('/login', function () {
   }
 
   if (count($msgErr) > 0) {
-    return [
+    Sapi::toJSON([
       'success' => false,
       'msg' => $msgErr
-    ];
+    ]);
   } else {
     $db = new Database();
     $users = $db->getUser('name', $data->username);
     if (count($users) > 0) {
       if (password_verify($data->password, $users[0]['password']) == true) {
-        return [
+        Sapi::toJSON([
           'success' => true,
           'msg' => 'login berhasil'
-        ];  
+        ]);
       } else {
-        return [
+        Sapi::toJSON([
           'success' => false,
           'msg' => 'username dan password tidak cocok!'
-        ];  
+        ]);  
       }
     } else {
-      return [
+      Sapi::toJSON([
         'success' => false,
         'msg' => 'username dan password tidak cocok!'
-      ];
+      ]);
     }
   }
 }, 'POST');
@@ -69,22 +69,26 @@ $s->set_routes('/register', function () {
   } 
 
   if (count($msgErr) > 0) {
-    return [
+    Sapi::toJSON([
       'success' => false,
       'msg' => $msgErr
-    ];
+    ]);
   } else {
     $data->password = password_hash($data->password, PASSWORD_DEFAULT);
     $arr = [$data->username, $data->password];
     $insert_id = $db->register($arr);
-    return [
+    Sapi::toJSON([
       'success' => true,
       'data' => [
         'id' => $insert_id,
         'username' => $data->username
       ]
-    ];
+    ]);
   }
 }, 'POST');
+
+$s->set_routes('/testing', function () {
+  Sapi::toJSON(['testing' => 'oke']);
+});
 
 $s->run();

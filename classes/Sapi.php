@@ -22,10 +22,15 @@ class Sapi
     foreach ( $this->routes as $key => $value ) {
       if ($get === $key) {
         if ( $value['verb'] == $http_verb ) {
-          echo json_encode( $value['function']() );
+          return $value['function']();
           break 1;
         }
       }
     }
+  }
+
+  static function toJSON($arr)
+  {
+    echo json_encode($arr);
   }
 }
