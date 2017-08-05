@@ -22,7 +22,16 @@ class Sapi
     foreach ( $this->routes as $key => $value ) {
       if ($get === $key) {
         if ( $value['verb'] == $http_verb ) {
-          return $value['function']();
+          $type_var = gettype($value['function']);
+          if ($type_var == 'string') {
+            $controller = $value['function'];
+            $explode_controller = explode('/', $controller);
+            include_once "classes/" . $explode_controller[0] . '.php';
+            $object = new $explode_controller[0]();
+            return $object->{$explode_controller[1]}();
+          } else if ($type_var == 'object') {
+            return $value['function']();
+          }
           break 1;
         }
       }

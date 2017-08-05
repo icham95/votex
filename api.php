@@ -91,8 +91,6 @@ $s->set_routes('/register', function () {
   }
 }, 'POST');
 
-$s->set_routes('/testing', function () {
-  Sapi::toJSON(['testing' => 'oke']);
-});
+$s->set_routes('/testing', 'Controller_api/haha');
 
 $s->run();
