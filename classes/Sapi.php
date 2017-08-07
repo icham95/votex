@@ -26,8 +26,11 @@ class Sapi
           if ($type_var == 'string') {
             $controller = $value['function'];
             $explode_controller = explode('/', $controller);
-            include_once "classes/" . $explode_controller[0] . '.php';
-            $object = new $explode_controller[0]();
+            # ga pake namespace
+            // include_once "classes/" . $explode_controller[0] . '.php';
+            # pake namespace
+            $named = "classes\\$explode_controller[0]";
+            $object = new $named();
             return $object->{$explode_controller[1]}();
           } else if ($type_var == 'object') {
             return $value['function']();
